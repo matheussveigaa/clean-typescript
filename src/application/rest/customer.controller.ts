@@ -7,7 +7,6 @@ import {
 	Post,
 	Put,
 } from '@nestjs/common';
-import { Customer } from '../../domain/entities/customer.entity';
 import { CreateCustomerDTO } from '../dto/create-customer.dto';
 import { CustomerDTO } from '../dto/customer.dto';
 import { UpdateCustomerDTO } from '../dto/update-customer.dto';
