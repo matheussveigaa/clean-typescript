@@ -8,6 +8,9 @@ import {
 	Put,
 } from '@nestjs/common';
 import { Customer } from '../../domain/entities/customer.entity';
+import { CreateCustomerDTO } from '../dto/create-customer.dto';
+import { CustomerDTO } from '../dto/customer.dto';
+import { UpdateCustomerDTO } from '../dto/update-customer.dto';
 import { CustomerService } from '../services/customer.service';
 
 @Controller('customers')
@@ -15,27 +18,27 @@ export class CustomerController {
 	constructor(private customerService: CustomerService) {}
 
 	@Get()
-	async findAll(): Promise<Customer[]> {
+	async findAll(): Promise<CustomerDTO[]> {
 		return await this.customerService.findAll();
 	}
 
 	@Post()
-	async save(@Body() customer: Customer): Promise<void> {
-		await this.customerService.save(customer);
+	async save(@Body() customer: CreateCustomerDTO): Promise<CustomerDTO> {
+		return await this.customerService.save(customer);
 	}
 
 	@Put()
-	async update(@Body() customer: Customer): Promise<Customer> {
+	async update(@Body() customer: UpdateCustomerDTO): Promise<CustomerDTO> {
 		return await this.customerService.update(customer);
 	}
 
 	@Delete(':id')
-	async delete(@Param('id') id: string): Promise<Customer> {
+	async delete(@Param('id') id: string): Promise<CustomerDTO> {
 		return await this.customerService.delete(id);
 	}
 
 	@Get(':id')
-	async findById(@Param('id') id: string): Promise<Customer> {
+	async findById(@Param('id') id: string): Promise<CustomerDTO> {
 		return await this.customerService.findById(id);
 	}
 }
